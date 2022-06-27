@@ -119,7 +119,7 @@ jointModel <- function (lmeObject, survObject, timeVar, parameterization = c("va
             "maybe you forgot the cluster() argument.\n")
     TermsX <- lmeObject$terms
     data <- lmeObject$data[all.vars(TermsX)]
-    data <- as.matrix(data[complete.cases(data), ])
+    data <- as.data.frame(data[complete.cases(data), ])
     formYx <- formula(lmeObject)
     mfX <- model.frame(TermsX, data = data)
     X <- model.matrix(formYx, mfX)
@@ -128,7 +128,7 @@ jointModel <- function (lmeObject, survObject, timeVar, parameterization = c("va
     TermsZ <- attr(mfZ, "terms")
     Z <- model.matrix(formYz, mfZ)
     y.long <- model.response(mfX, "numeric")
-    data.id <- as.matrix(data[!duplicated(id), ])
+    data.id <- as.data.frame(data[!duplicated(id), ])
     data.id <- data.id[idT, ]
     if (!timeVar %in% names(data))
         stop("\n'timeVar' does not correspond to one of the columns in the model.frame of 'lmeObject'.")
