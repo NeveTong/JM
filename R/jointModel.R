@@ -118,7 +118,7 @@ jointModel <- function (lmeObject, survObject, timeVar, parameterization = c("va
         stop("sample sizes in the longitudinal and event processes differ; ", 
             "maybe you forgot the cluster() argument.\n")
     TermsX <- lmeObject$terms
-    data <- lmeObject$data[all.vars(TermsX)]
+    data <- lmeObject$data
     data <- data[complete.cases(data), , drop = FALSE]     # Keep column name when select one column from a data frame/matrix
     formYx <- formula(lmeObject)
     mfX <- model.frame(TermsX, data = data)
